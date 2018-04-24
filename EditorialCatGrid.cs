@@ -168,7 +168,7 @@ ICollection editorial_categories_CreateDataSource() {
 	if(Utility.GetParam("Formeditorial_categories_Sorting").Length>0&&!IsPostBack)
 	{ViewState["SortColumn"]=Utility.GetParam("Formeditorial_categories_Sorting");
 	 ViewState["SortDir"]="ASC";}
-	if(ViewState["SortColumn"]!=null) sOrder = " ORDER BY " + ViewState["SortColumn"].ToString()+" "+ViewState["SortDir"].ToString();
+	if(ViewState["SortColumn"]!=null) sOrder = "ORDER BY @SortColumn @SortDir";
 	
 	System.Collections.Specialized.StringDictionary Params =new System.Collections.Specialized.StringDictionary();
 	
@@ -210,6 +210,9 @@ ICollection editorial_categories_CreateDataSource() {
 	//-------------------------------
 	
 	OleDbDataAdapter command = new OleDbDataAdapter(editorial_categories_sSQL, Utility.Connection);
+        command.SelectCommand.Parameters.Add(new System.Data.OleDb.OleDbParameter("@SortColumn", viewstate["SortColumn"]));
+        command.SelectCommand.Parameters.Add(new System.Data.OleDb.OleDbParameter("@SortDir", viewstate["SortDir"]));
+
 	DataSet ds = new DataSet();
 	
 	command.Fill(ds, (i_editorial_categories_curpage - 1) * editorial_categories_PAGENUM, editorial_categories_PAGENUM,"editorial_categories");

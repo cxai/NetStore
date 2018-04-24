@@ -184,8 +184,10 @@ void Detail_Show() {
 		
 // Detail Open Event begin
 // Detail Open Event end
-		string sSQL = "select * from items where " + sWhere;
+		string sSQL = "select * from items where @sWhere";
 		OleDbDataAdapter dsCommand = new OleDbDataAdapter(sSQL, Utility.Connection);
+                dsCommand.SelectCommand.Parameters.Add(new System.Data.OleDb.OleDbParameter("@sWhere", sWhere);
+
 		DataSet ds = new DataSet();
 		DataRow row;
 
@@ -319,8 +321,10 @@ void Order_Show() {
 		
 // Order Open Event begin
 // Order Open Event end
-		string sSQL = "select * from orders where " + sWhere;
+		string sSQL = "select * from orders where @sWhere";
 		OleDbDataAdapter dsCommand = new OleDbDataAdapter(sSQL, Utility.Connection);
+                dsCommand.SelectCommand.Parameters.Add(new System.Data.OleDb.OleDbParameter("@sWhere", sWhere);
+
 		DataSet ds = new DataSet();
 		DataRow row;
 
@@ -473,8 +477,10 @@ void Rating_Show() {
 		
 // Rating Open Event begin
 // Rating Open Event end
-		string sSQL = "select * from items where " + sWhere;
+		string sSQL = "select * from items where @sWhere";
 		OleDbDataAdapter dsCommand = new OleDbDataAdapter(sSQL, Utility.Connection);
+                dsCommand.SelectCommand.Parameters.Add(new System.Data.OleDb.OleDbParameter("@sWhere", sWhere));
+
 		DataSet ds = new DataSet();
 		DataRow row;
 
