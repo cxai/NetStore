@@ -166,7 +166,7 @@ ICollection CardTypes_CreateDataSource() {
 	if(Utility.GetParam("FormCardTypes_Sorting").Length>0&&!IsPostBack)
 	{ViewState["SortColumn"]=Utility.GetParam("FormCardTypes_Sorting");
 	 ViewState["SortDir"]="ASC";}
-	if(ViewState["SortColumn"]!=null) sOrder = " ORDER BY " + ViewState["SortColumn"].ToString()+" "+ViewState["SortDir"].ToString();
+	if(ViewState["SortColumn"]!=null) sOrder = "ORDER BY @SortColumn @SortDir";
 	
 	System.Collections.Specialized.StringDictionary Params =new System.Collections.Specialized.StringDictionary();
 	
@@ -199,6 +199,8 @@ ICollection CardTypes_CreateDataSource() {
 	//-------------------------------
 	
 	OleDbDataAdapter command = new OleDbDataAdapter(CardTypes_sSQL, Utility.Connection);
+        command.SelectCommand.Parameters.Add(new System.Data.OleDb.OleDbParameter("@SortColumn", viewstate["SortColumn"]));
+        command.SelectCommand.Parameters.Add(new System.Data.OleDb.OleDbParameter("@SortDir", viewstate["SortDir"]));
 	DataSet ds = new DataSet();
 	 	
 	command.Fill(ds, 0, CardTypes_PAGENUM, "CardTypes");

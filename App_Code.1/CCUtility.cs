@@ -113,7 +113,7 @@
 			if (row[field].ToString() == null)
 				return "";
 			else
-				return row[field].ToString();
+				return Server.HtmlEncode(row[field].ToString());
 		}
 
         public OleDbConnection Connection;
@@ -182,7 +182,7 @@
 		}
 
 		reader.Close();
-		return sReturn;
+		return Server.HTMLEncode(sReturn);
 	}
 
 	public int DlookupInt(string table, string field, string sWhere)
